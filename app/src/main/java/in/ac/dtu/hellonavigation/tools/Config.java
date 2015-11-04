@@ -1,4 +1,4 @@
-package in.ac.dtu.hellonavigation;
+package in.ac.dtu.hellonavigation.tools;
 
 import android.app.SearchManager;
 import android.provider.BaseColumns;

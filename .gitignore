@@ -24,7 +24,6 @@ local.properties
 proguard/
 
 # Log Files
-<<<<<<< HEAD
 *.log
 .gradle
 /local.properties
