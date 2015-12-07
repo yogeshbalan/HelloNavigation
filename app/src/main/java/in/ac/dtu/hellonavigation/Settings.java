@@ -9,7 +9,11 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -28,15 +32,12 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
-
 import java.text.DecimalFormat;
 
+import in.ac.dtu.hellonavigation.tools.Config;
+
 @SuppressLint("NewApi")
-public class Settings extends SherlockActivity implements OnEditorActionListener, OnCheckedChangeListener {
+public class Settings extends AppCompatActivity implements OnEditorActionListener, OnCheckedChangeListener {
 
     static DecimalFormat df = new DecimalFormat("0");
     EditText editText;
@@ -55,7 +56,7 @@ public class Settings extends SherlockActivity implements OnEditorActionListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSherlock().getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSherlock().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.settings);
 

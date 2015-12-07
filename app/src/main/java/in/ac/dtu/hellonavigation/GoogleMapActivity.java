@@ -1,11 +1,12 @@
 package in.ac.dtu.hellonavigation;
 
+import android.database.MatrixCursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import in.ac.dtu.hellonavigation.tools.Config;
 
@@ -22,6 +23,8 @@ public class GoogleMapActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         Config.usingGoogleMaps = true;
         setContentView(R.layout.googlemap_layout);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+
     }
 
 

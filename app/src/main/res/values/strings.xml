@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">HelloNavigation</string>
     <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
 
     <string name="tx_01">Start <b>step based</b> navigation</string>
     <string name="tx_02">Address</string>

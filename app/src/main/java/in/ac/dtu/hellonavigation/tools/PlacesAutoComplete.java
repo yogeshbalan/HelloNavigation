@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
 
+import in.ac.dtu.hellonavigation.GoogleMapActivity;
 import in.ac.dtu.hellonavigation.OsmMapActivity;
 
 public class PlacesAutoComplete extends AsyncTask<String, String, StringBuilder> {
@@ -97,8 +98,8 @@ public class PlacesAutoComplete extends AsyncTask<String, String, StringBuilder>
             }
 
             if (Config.usingGoogleMaps) {
-                //not in free version: GoogleMapActivity.cursor = cursor;
-                //not in free version: GoogleMapActivity.changeSuggestionAdapter.sendEmptyMessage(0);
+                //GoogleMapActivity.cursor = cursor;
+                //GoogleMapActivity.changeSuggestionAdapter.sendEmptyMessage(0);
             } else {
                 OsmMapActivity.cursor = cursor;
                 OsmMapActivity.changeSuggestionAdapter.sendEmptyMessage(0);

@@ -6,9 +6,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
-
-import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * @author Christian Henke
@@ -27,7 +26,7 @@ public class Info extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

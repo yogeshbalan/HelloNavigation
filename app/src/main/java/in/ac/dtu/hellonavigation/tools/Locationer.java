@@ -13,11 +13,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.ilm.sandwich.GoogleMapActivity;
-
 import java.util.Iterator;
 
 import in.ac.dtu.hellonavigation.BackgroundService;
+import in.ac.dtu.hellonavigation.GoogleMapActivity;
 import in.ac.dtu.hellonavigation.OsmMapActivity;
 
 public class Locationer implements LocationListener {

@@ -23,10 +23,14 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -40,26 +44,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
-
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
-import com.actionbarsherlock.view.Window;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
-import com.actionbarsherlock.widget.SearchView.OnSuggestionListener;
-import com.ilm.sandwich.tools.Core;
-import com.ilm.sandwich.tools.Locationer;
-import com.ilm.sandwich.tools.MyItemizedOverlay;
-import com.ilm.sandwich.tools.PlacesAutoComplete;
-import com.ilm.sandwich.tools.PlacesTextSearch;
-import com.ilm.sandwich.tools.Statistics;
-import com.ilm.sandwich.tools.SuggestionsAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,16 +77,20 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 
 import in.ac.dtu.hellonavigation.tools.Config;
+import in.ac.dtu.hellonavigation.tools.Core;
 import in.ac.dtu.hellonavigation.tools.Locationer;
+import in.ac.dtu.hellonavigation.tools.MyItemizedOverlay;
 import in.ac.dtu.hellonavigation.tools.PlacesAutoComplete;
 import in.ac.dtu.hellonavigation.tools.PlacesTextSearch;
 import in.ac.dtu.hellonavigation.tools.Statistics;
+import in.ac.dtu.hellonavigation.tools.SuggestionsAdapter;
 
 @SuppressLint({"NewApi"})
 public class OsmMapActivity extends AppCompatActivity implements SensorEventListener, MapEventsReceiver {
 
     public static Handler listHandler;
     public static SearchView searchView;
+    public static SearchManager searchManager;
     public static boolean firstPositionFound;
     public static SuggestionsAdapter mSuggestionsAdapter;
     public static boolean suggestionsInProgress = false;
@@ -201,7 +194,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
             Toast.makeText(this, getResources().getString(R.string.tx_43), Toast.LENGTH_LONG).show();
         }
 
-        //Core of SmartNavi
+        //Core of HelloNavigation
         //does all the step-detection and orientation estimations
         //as well as export feature
         mCore = new Core();
@@ -366,7 +359,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
                     listHandler.sendEmptyMessage(6);
                 } else if (msg.what == 1) {
                     // set margin for compass, dependent on the height of the actionbar
-                    int height = getSherlock().getActionBar().getHeight();
+                    int height = getSupportActionBar().getHeight();
                     if (height > 0) {
                         try {
                             ImageView compass = (ImageView) findViewById(R.id.osmNadel);
@@ -549,7 +542,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
             }
 
         } else if (userSwitchesGPS == true) {
-            // User has been sent by SmartNavi into his settings to check GPS etc.
+            // User has been sent by HelloNavigation into his settings to check GPS etc.
             //so start getting a new location
             mLocationer.startLocationUpdates();
             ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBarOsm);
@@ -1164,7 +1157,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
     }
 
     @Override
-    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         mainMenu = menu;
 
@@ -1183,6 +1176,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
                 .setActionView(searchView).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
@@ -1205,7 +1199,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
     }
 
     @Override
-    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         // if off, longPressMenu will be made invisible
         try {
@@ -1240,7 +1234,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
                 offlineMapsButtonWebsite.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://smartnavi-app.com/offline"));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://HelloNavigation-app.com/offline"));
                         startActivity(browserIntent);
                         finish();
                     }
@@ -1296,7 +1290,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
 
     private void prepareSearchView() {
         // Create the search view
-        searchView = new SearchView(getSupportActionBar().getThemedContext());
+        searchView = new android.widget.SearchView(getSupportActionBar().getThemedContext());
         searchView.setQueryHint(getApplicationContext().getResources().getString(R.string.tx_02));
         // get static themed context for autocomplete update
         sbContext = getSupportActionBar().getThemedContext();
@@ -1320,7 +1314,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
         });
 
         // autocomplete suggestions
-        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -1399,7 +1393,7 @@ public class OsmMapActivity extends AppCompatActivity implements SensorEventList
             }
         });
 
-        searchView.setOnSuggestionListener(new OnSuggestionListener() {
+        searchView.setOnSuggestionListener(new android.widget.SearchView.OnSuggestionListener() {
 
             @Override
             public boolean onSuggestionSelect(int position) {

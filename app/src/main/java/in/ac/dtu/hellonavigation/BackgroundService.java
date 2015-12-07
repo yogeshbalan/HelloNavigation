@@ -7,10 +7,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -203,14 +206,25 @@ public class BackgroundService extends AppCompatActivity {
             geoLocationManager.addTestProvider(mocLocationNetworkProvider, false, false, false, false, true, true, true, 1, 5);
             geoLocationManager.setTestProviderEnabled(mocLocationNetworkProvider, true);
 
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
             notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notification = new Notification(R.drawable.stats, getApplicationContext().getResources().getString(R.string.tx_72), System.currentTimeMillis());
+//            notification = new Notification(R.drawable.stats, getApplicationContext().getResources().getString(R.string.tx_72), System.currentTimeMillis());
             Intent intent = new Intent(this, BackgroundService.class);
             PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
+            notification  = new NotificationCompat.Builder(getApplicationContext())
+                    .setContentTitle(getApplicationContext().getResources().getString(R.string.tx_72))
+                    .setContentText("Hello Navigation")
+                    .setContentIntent(activity)
+                    .setSmallIcon(R.drawable.stats)
+                    .setLargeIcon(largeIcon)
+                    .build();
+
             notification.flags = Notification.FLAG_ONGOING_EVENT;
-            notification.setLatestEventInfo(this, "SmartNavi", getApplicationContext().getResources().getString(R.string.tx_73), activity);
+//            notification.setLatestEventInfo(this, "HelloNavigation", getApplicationContext().getResources().getString(R.string.tx_73), activity);
             notificationManager.notify(0, notification);
             serviceButton.setText(getApplicationContext().getResources().getString(R.string.tx_69));
+
 
             shouldStart = false;
             serviceButton.setText(getApplicationContext().getResources().getString(R.string.tx_69));

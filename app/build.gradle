@@ -11,6 +11,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    android {
+        packagingOptions {
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,7 +39,7 @@ dependencies {
     compile(name: 'osmbonuspack_v5.2', ext: 'aar')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    //compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.google.android.gms:play-services:+'
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.6.1-RC1'

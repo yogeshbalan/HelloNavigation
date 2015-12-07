@@ -137,7 +137,7 @@ public class Core {
 
     private static void positionOutput() {
         try {
-            File folder = new File(Environment.getExternalStorageDirectory() + "/smartnavi/");
+            File folder = new File(Environment.getExternalStorageDirectory() + "/HelloNavigation/");
             folder.mkdir();
             if (folder.canWrite()) {
                 if (positionsFileNotExisting) {
@@ -153,7 +153,7 @@ public class Core {
                     df.setTimeZone(tz);
                     String nowAsISO = df.format(new Date());
 
-                    out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><gpx> <trk><name>SmartNavi " + nowAsISO
+                    out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><gpx> <trk><name>HelloNavigation " + nowAsISO
                             + "</name><number>1</number><trkseg>");
                     out.close();
                     positionsFileNotExisting = false;
@@ -202,7 +202,7 @@ public class Core {
 
     private static void dataOutput() {
         try {
-            File folder = new File(Environment.getExternalStorageDirectory() + "/smartnavi/");
+            File folder = new File(Environment.getExternalStorageDirectory() + "/HelloNavigation/");
             folder.mkdir();
             if (folder.canWrite()) {
                 if (sensorFileNotExisting) {
